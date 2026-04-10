@@ -67,6 +67,38 @@ st.markdown(
     margin-top: 0.6rem;
     font-size: 0.9rem;
 }
+/* 체험존 분위기: 은은한 다색 배경 */
+.stApp {
+    background: linear-gradient(165deg,
+        #e8ecff 0%,
+        #f3e8ff 28%,
+        #e0f7f4 55%,
+        #fff4e6 85%,
+        #fdf2f8 100%) !important;
+}
+/* 본문 패널: 살짝 투명해 배경색이 비침 */
+.main .block-container {
+    padding-top: 1.1rem !important;
+    background: rgba(255, 255, 255, 0.58) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px !important;
+    border: 1px solid rgba(255, 255, 255, 0.85) !important;
+    box-shadow: 0 8px 40px rgba(79, 70, 229, 0.1) !important;
+}
+/* 분야 선택 전용 CTA (type="primary" 인 필드 버튼만 해당) */
+.stApp button[kind="primary"] {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 40%, #e11d48 100%) !important;
+    color: #ffffff !important;
+    border: none !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em;
+    box-shadow: 0 6px 22px rgba(79, 70, 229, 0.42) !important;
+}
+.stApp button[kind="primary"]:hover {
+    box-shadow: 0 10px 28px rgba(124, 58, 237, 0.5) !important;
+    filter: brightness(1.06);
+}
 </style>
 """,
     unsafe_allow_html=True,
@@ -253,6 +285,46 @@ SCENARIOS = {
     },
 }
 
+# 분야 선택 카드 전용 비주얼 (배경·테두리·타이틀 색)
+FIELD_VISUAL = {
+    "🏥 의료": {
+        "bar": "linear-gradient(180deg, #6366f1, #a855f7)",
+        "bg": "linear-gradient(145deg, rgba(99,102,241,0.28) 0%, rgba(167,139,250,0.14) 42%, #ffffff 100%)",
+        "border": "1px solid rgba(99,102,241,0.5)",
+        "shadow": "0 12px 36px rgba(99,102,241,0.22), 0 0 0 1px rgba(255,255,255,0.6) inset",
+        "title_color": "#312e81",
+        "text_color": "#4338ca",
+        "badge": "linear-gradient(90deg, #6366f1, #8b5cf6)",
+    },
+    "🚗 자율주행": {
+        "bar": "linear-gradient(180deg, #059669, #06b6d4)",
+        "bg": "linear-gradient(145deg, rgba(5,150,105,0.22) 0%, rgba(6,182,212,0.16) 45%, #ffffff 100%)",
+        "border": "1px solid rgba(5,150,105,0.45)",
+        "shadow": "0 12px 36px rgba(6,182,212,0.2), 0 0 0 1px rgba(255,255,255,0.6) inset",
+        "title_color": "#064e3b",
+        "text_color": "#0f766e",
+        "badge": "linear-gradient(90deg, #059669, #0891b2)",
+    },
+    "🔒 보안": {
+        "bar": "linear-gradient(180deg, #db2777, #9333ea)",
+        "bg": "linear-gradient(145deg, rgba(219,39,119,0.2) 0%, rgba(147,51,234,0.14) 45%, #ffffff 100%)",
+        "border": "1px solid rgba(219,39,119,0.45)",
+        "shadow": "0 12px 36px rgba(147,51,234,0.2), 0 0 0 1px rgba(255,255,255,0.6) inset",
+        "title_color": "#831843",
+        "text_color": "#9d174d",
+        "badge": "linear-gradient(90deg, #db2777, #9333ea)",
+    },
+    "🛒 쇼핑 추천": {
+        "bar": "linear-gradient(180deg, #ea580c, #eab308)",
+        "bg": "linear-gradient(145deg, rgba(234,88,12,0.22) 0%, rgba(234,179,8,0.16) 45%, #ffffff 100%)",
+        "border": "1px solid rgba(234,88,12,0.45)",
+        "shadow": "0 12px 36px rgba(234,88,12,0.2), 0 0 0 1px rgba(255,255,255,0.6) inset",
+        "title_color": "#9a3412",
+        "text_color": "#b45309",
+        "badge": "linear-gradient(90deg, #ea580c, #ca8a04)",
+    },
+}
+
 
 def init_state() -> None:
     defaults = {
@@ -357,7 +429,7 @@ st.markdown(
 # STEP 1
 # ─────────────────────────────────────────────
 if st.session_state.step == 1:
-    st.subheader("① 체험할 분야를 선택하세요")
+    st.markdown("### ✨ ① 체험할 분야를 선택하세요")
     st.caption("각 분야에서 AI가 실제로 어떤 판단을 내리는지 확인할 수 있습니다.")
 
     field_list = list(SCENARIOS.keys())
@@ -371,30 +443,45 @@ if st.session_state.step == 1:
             meta = SCENARIOS[field]
             intro = meta["intro"]
             count = len(meta["questions"])
-            accent = meta.get("color", "#667eea")
+            vis = FIELD_VISUAL.get(
+                field,
+                {
+                    "bar": meta.get("color", "#667eea"),
+                    "bg": "linear-gradient(180deg,#f8fafc,#fff)",
+                    "border": "1px solid #e2e8f0",
+                    "shadow": "0 4px 16px rgba(15,23,42,0.08)",
+                    "title_color": "#1e293b",
+                    "text_color": "#475569",
+                    "badge": "#64748b",
+                },
+            )
             with col:
                 st.markdown(
                     f"""
 <div style="
-  border:1px solid #e8e8ef;
-  border-radius:14px;
-  padding:14px 14px 10px 14px;
-  min-height:168px;
-  margin-bottom:6px;
-  background:linear-gradient(180deg,#fafbff 0%,#ffffff 100%);
-  border-left:4px solid {accent};
+  position:relative;
+  border-radius:16px;
+  padding:16px 16px 12px 18px;
+  min-height:176px;
+  margin-bottom:8px;
+  background:{vis['bg']};
+  border:{vis['border']};
+  box-shadow:{vis['shadow']};
   box-sizing:border-box;
+  overflow:hidden;
 ">
-  <div style="font-size:1.05rem;font-weight:600;margin:0 0 8px 0;line-height:1.3;">{field}</div>
-  <div style="font-size:0.9rem;color:#444;line-height:1.5;margin:0;">{intro}</div>
-  <div style="font-size:0.82rem;color:#666;margin-top:10px;">📋 시나리오 <b>{count}</b>개</div>
+  <div style="position:absolute;left:0;top:0;bottom:0;width:6px;border-radius:16px 0 0 16px;background:{vis['bar']};"></div>
+  <div style="font-size:1.12rem;font-weight:800;margin:0 0 10px 0;line-height:1.25;color:{vis['title_color']};letter-spacing:-0.02em;">{field}</div>
+  <div style="font-size:0.92rem;color:{vis['text_color']};line-height:1.55;margin:0;opacity:0.95;">{intro}</div>
+  <div style="margin-top:14px;display:inline-block;padding:4px 12px;border-radius:999px;font-size:0.78rem;font-weight:700;color:#fff;background:{vis['badge']};box-shadow:0 2px 8px rgba(0,0,0,0.12);">📋 시나리오 {count}개</div>
 </div>
 """,
                     unsafe_allow_html=True,
                 )
                 if st.button(
-                    "이 분야 체험하기",
+                    "🚀 이 분야 체험하기",
                     key=f"field_{btn_idx}",
+                    type="primary",
                     use_container_width=True,
                     help=f"{field}: {intro}",
                 ):
