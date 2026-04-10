@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 280" role="img">
+  <title>??? ?? ???? ???</title>
+  <rect width="480" height="280" fill="#0f172a" rx="12"/>
+  <text x="240" y="26" fill="#94a3b8" font-size="12" font-family="Malgun Gothic,system-ui,sans-serif" text-anchor="middle">????? ??? ? ?? (?????)</text>
+  <circle cx="420" cy="48" r="22" fill="#fef9c3" opacity="0.85"/>
+  <rect x="140" y="60" width="200" height="200" rx="8" fill="#1e293b" stroke="#334155" stroke-width="3"/>
+  <rect x="160" y="80" width="160" height="160" fill="#0c1222"/>
+  <rect x="360" y="70" width="48" height="32" rx="4" fill="#334155"/>
+  <circle cx="384" cy="86" r="10" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
+  <circle cx="384" cy="86" r="5" fill="#38bdf8" opacity="0.6"/>
+  <ellipse cx="240" cy="150" rx="48" ry="58" fill="none" stroke="#818cf8" stroke-width="2" opacity="0.9"/>
+  <circle cx="225" cy="138" r="6" fill="#6366f1" opacity="0.5"/>
+  <circle cx="255" cy="138" r="6" fill="#6366f1" opacity="0.5"/>
+  <path d="M220 168 Q240 182 260 168" fill="none" stroke="#6366f1" stroke-width="2" opacity="0.6"/>
+  <text x="240" y="52" fill="#f472b6" font-size="22" font-family="ui-monospace,monospace" font-weight="bold" text-anchor="middle">02:00</text>
+  <rect x="300" y="185" width="120" height="44" rx="8" fill="#14532d" stroke="#22c55e" stroke-width="2"/>
+  <text x="360" y="208" fill="#86efac" font-size="14" font-family="Malgun Gothic,system-ui,sans-serif" font-weight="bold" text-anchor="middle">?? 92%</text>
+  <text x="240" y="265" fill="#a78bfa" font-size="10" font-family="Malgun Gothic,system-ui,sans-serif" text-anchor="middle">?? ?? ? ? ???? ?? ??</text>
+</svg>
